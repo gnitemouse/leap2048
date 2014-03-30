@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>2048</title>
@@ -12,7 +12,13 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+<script src="js/jquery.js" ></script>
+  <script src="js/leap.js"></script>
+<script src="js/underscore-min.js" ></script>
 </head>
+
 <body>
   <div class="container">
     <div class="heading">
@@ -24,7 +30,7 @@
     </div>
 
     <div class="above-game">
-      <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
+      <p class="game-intro">Use a LeapMotion! Join the numbers and get to the <strong>2048 tile!</strong></p>
       <a class="restart-button">New Game</a>
     </div>
 
@@ -37,7 +43,7 @@
         </div>
       </div>
 
-      <div class="grid-container">
+      <div class="grid-container leap-interactive">
         <div class="grid-row">
           <div class="grid-cell"></div>
           <div class="grid-cell"></div>
@@ -70,15 +76,15 @@
     </div>
 
     <p class="game-explanation">
-      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+      <strong class="important">How to play:</strong> Use your
+      <strong>leap motion</strong> to move the tiles (swipe up, down,
+      left, or right). When two tiles with the same number touch, they <strong>merge into one!</strong>
     </p>
     <hr>
     <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
-    </p>
-    <hr>
-    <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
+    Original game by <a href="http://gabrielecirulli.com"
+      target="_blank">Gabriele Cirulli.</a> LeapMotion implementation by
+    Leo & Mouse.
     </p>
   </div>
 
@@ -92,5 +98,6 @@
   <script src="js/local_storage_manager.js"></script>
   <script src="js/game_manager.js"></script>
   <script src="js/application.js"></script>
+
 </body>
 </html>

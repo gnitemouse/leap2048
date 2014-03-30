@@ -1,7 +1,9 @@
 function KeyboardInputManager() {
   this.events = {};
-
-  if (window.navigator.msPointerEnabled) {
+  this.ctl = new Leap.Controller({enableGestures: true});
+  this.swiper = this.ctl.gesture('swipe');
+  this.tapper = this.ctl.gesture('screenTap');
+    if (window.navigator.msPointerEnabled) {
     //Internet Explorer 10 style
     this.eventTouchstart    = "MSPointerDown";
     this.eventTouchmove     = "MSPointerMove";
@@ -125,6 +127,33 @@ KeyboardInputManager.prototype.listen = function () {
       self.emit("move", absDx > absDy ? (dx > 0 ? 1 : 3) : (dy > 0 ? 2 : 0));
     }
   });
+
+  //Leap motion stuff
+  var tolerance = 50;
+  var cooloff = 300;
+  var slider = function(xDir, yDir) {
+    if (xDir == 0) {
+      if (yDir == 1) { self.emit("move", 0); }
+      if (yDir == -1) { self.emit("move", 2); }
+    }
+    if (yDir == 0) {
+      if (xDir == 1) { self.emit("move", 1); }
+      if (xDir == -1) { self.emit("move", 3); }
+    }
+  }
+  var slided = _.debounce(slider, cooloff);
+
+  this.swiper.update(function(g) {
+    var xDir = Math.abs(g.translation()[0]) > tolerance ?  (g.translation()[0] > 0 ? -1 : 1) : 0;
+    var yDir = Math.abs(g.translation()[1]) > tolerance ?  (g.translation()[1] > 0 ? -1 : 1) : 0;
+    slided(xDir,yDir);
+  });
+
+  this.tapper.update(function(g) {
+    this.restart;
+  });
+
+  this.ctl.connect();
 };
 
 KeyboardInputManager.prototype.restart = function (event) {
